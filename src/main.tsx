@@ -1,16 +1,22 @@
+import { ChakraProvider, HStack } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import Employee from "./components/Employee";
+import { Employee } from "./components/Employee";
+import { SearchInput } from "./components/SearchInput";
 
-import "./index.css";
+import { theme } from "./theme";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <p>The home page</p>,
+    element: (
+      <HStack>
+        <SearchInput />
+      </HStack>
+    ),
   },
   {
     path: "employees/:employeeId",
@@ -20,8 +26,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
-    <QueryClientProvider client={new QueryClient()}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <ChakraProvider theme={theme}>
+      <QueryClientProvider client={new QueryClient()}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </ChakraProvider>
   </StrictMode>
 );

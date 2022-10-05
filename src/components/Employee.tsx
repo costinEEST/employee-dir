@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { useEmployee } from "../hooks/useEmployee";
 
-export default function Employee() {
+export function Employee() {
   const { employeeId } = useParams();
 
   const { data, error, isLoading } = useEmployee(

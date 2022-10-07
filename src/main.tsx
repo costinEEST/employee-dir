@@ -1,35 +1,29 @@
-import { ChakraProvider, HStack } from "@chakra-ui/react";
+import { ChakraProvider, Container } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { Employee } from "./components/Employee";
-import { SearchInput } from "./components/SearchInput";
+import { Header } from "./components/Header";
+import { SearchResults } from "./components/SearchResults";
 
 import { theme } from "./theme";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <HStack>
-        <SearchInput />
-      </HStack>
-    ),
-  },
-  {
-    path: "employees/:employeeId",
-    element: <Employee />,
-  },
-]);
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
-      <QueryClientProvider client={new QueryClient()}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={new QueryClient()}>
+          <Header />
+          <Container pt="6" maxW="container.md">
+            <Routes>
+              <Route path="/" element={<SearchResults />} />
+              <Route path="employees/:id" element={<Employee />} />
+            </Routes>
+          </Container>
+        </QueryClientProvider>
+      </BrowserRouter>
     </ChakraProvider>
   </StrictMode>
 );

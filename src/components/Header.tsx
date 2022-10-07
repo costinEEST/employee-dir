@@ -1,4 +1,5 @@
 import { Heading, HStack } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 import { SearchInput } from "./SearchInput";
 
@@ -13,9 +14,11 @@ export function Header() {
       p={2}
       w="100vw"
     >
-      <Heading as="h1" size="lg">
-        Employee&nbsp;&nbsp;Directory
-      </Heading>
+      <Link to="/">
+        <Heading as="h1" size="lg">
+          Employee&nbsp;&nbsp;Directory
+        </Heading>
+      </Link>
       <SearchInput />
     </HStack>
   );

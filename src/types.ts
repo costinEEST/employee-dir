@@ -10,4 +10,5 @@ export interface Employee {
 
 export interface EmployeeResultProps {
   employees: Employee[];
+  searchTerm: string | null;
 }

@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { useEmployee } from "../hooks/useEmployee";
 
 export function Employee() {
-  const { employeeId } = useParams();
+  const { id } = useParams();
 
   const { data, error, isLoading } = useEmployee(
     "http://localhost:3030/employees",
-    employeeId
+    id
   );
 
   if (error) return <p>The GET failed</p>;

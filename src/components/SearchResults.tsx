@@ -1,13 +1,13 @@
 import { Heading } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
 
 import { useDebounce } from "../hooks/useDebounce";
+import { useSearchTerm } from "../hooks/useSearchTerm";
+
 import { EmployeeResult } from "./EmployeeResult";
 
 export function SearchResults() {
-  const [searchParams] = useSearchParams({ q: "" });
-  const searchTerm = searchParams.get("q");
+  const { searchTerm } = useSearchTerm();
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   const { isLoading, data } = useQuery(
     ["term", debouncedSearchTerm],
@@ -32,7 +32,7 @@ export function SearchResults() {
         {!searchTerm ? "All Employees" : `Search Results (${data.length})`}
       </Heading>
 
-      <EmployeeResult employees={data} />
+      <EmployeeResult employees={data} searchTerm={searchTerm} />
     </>
   );
 }

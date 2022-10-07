@@ -1,3 +1,4 @@
+import type { FormEvent } from "react";
 import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -8,37 +9,39 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { useSearchTerm } from "../hooks/useSearchTerm";
 
 export function SearchInput() {
-  const searchInputRef = useRef<HTMLInputElement>();
-  const [searchParams, setSearchParams] = useSearchParams({
-    q: "",
-  });
-
-  const searchTerm = searchParams.get("q");
-
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const { searchTerm, setSearchTerm } = useSearchTerm();
   const handleReset = () => {
     if (searchInputRef.current) {
       searchInputRef.current.value = "";
     }
 
     if (searchTerm) {
-      setSearchParams({ q: "" });
+      setSearchTerm({ q: "" });
     }
   };
 
-  const handleChange = (e) => {
-    // https://stackoverflow.com/a/68017204/1904223
-    const { name, value } = e.target;
+  const handleChange = (e: FormEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
 
-    setSearchParams({
+    setSearchTerm({
       [name]: value,
     });
   };
+
+  const navigate = useNavigate();
+  const handleFocus = () => {
+    navigate(searchTerm ? `/?q=${searchTerm}` : "/");
+  };
+
   return (
     <HStack marginLeft="auto !important">
-      <InputGroup>
+      <InputGroup onFocus={handleFocus}>
         <InputLeftElement
           pointerEvents="none"
           color="gray.300"

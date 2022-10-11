@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { Employee } from "./components/Employee";
 import { Header } from "./components/Header";
+import { Loading } from "./components/Loading";
 import { SearchResults } from "./components/SearchResults";
 
 import { theme } from "./theme";
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root") as HTMLElement).render(
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
+          <Loading />
           <Header />
           <Container pt="6" maxW="container.md">
             <Routes>

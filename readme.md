@@ -7,3 +7,4 @@
 - Run the Vite dev server on a [custom](https://koenwoortman.com/vitejs-run-dev-server-on-different-port) port (`npm run dev -- --port 3000`)
 - [`useDebounce`](https://usehooks-ts.com/react-hook/use-debounce) hook
 - [Debounced](https://dev.to/arnonate/debouncing-react-query-with-hooks-2ek6) and Typesafe React Query with Hooks
+- Make the CSS spinner [sticky](https://stackoverflow.com/a/6256124/1904223)

@@ -13,7 +13,7 @@ export function Employee() {
 
   if (error) return <p>The GET failed</p>;
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return null;
 
   const { imageFilePath, jobTitle, firstName, lastName, teamName } = data;
 

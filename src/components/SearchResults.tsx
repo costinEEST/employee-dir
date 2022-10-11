@@ -19,12 +19,7 @@ export function SearchResults() {
     }
   );
 
-  if (isLoading)
-    return (
-      <Heading as="h2" size="md">
-        Loading...
-      </Heading>
-    );
+  if (isLoading) return null;
 
   return (
     <>

@@ -9,7 +9,7 @@ import { EmployeeResult } from "./EmployeeResult";
 export function SearchResults() {
   const { searchTerm } = useSearchTerm();
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
-  const { isLoading, data } = useQuery(
+  const { isLoading, isError, data } = useQuery(
     ["term", debouncedSearchTerm],
     async () => {
       const response = await fetch(
@@ -19,7 +19,7 @@ export function SearchResults() {
     }
   );
 
-  if (isLoading) return null;
+  if (isLoading || isError) return null;
 
   return (
     <>

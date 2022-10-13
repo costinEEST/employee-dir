@@ -6,14 +6,12 @@ import { useEmployee } from "../hooks/useEmployee";
 export function Employee() {
   const { id } = useParams();
 
-  const { data, error, isLoading } = useEmployee(
+  const { data, isError, isLoading } = useEmployee(
     "http://localhost:3030/employees",
     id
   );
 
-  if (error) return <p>The GET failed</p>;
-
-  if (isLoading) return null;
+  if (isLoading || isError) return null;
 
   const { imageFilePath, jobTitle, firstName, lastName, teamName } = data;
 
